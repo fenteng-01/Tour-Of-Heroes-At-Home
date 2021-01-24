@@ -9,7 +9,6 @@ export class MessageService {
 
   add(message: string): void {
     this.messages.push(message)
-    console.log(this.messages)
   }
 
   clear(): void{
