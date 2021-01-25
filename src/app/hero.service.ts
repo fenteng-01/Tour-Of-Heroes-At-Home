@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs'
 import { MessageService } from './message.service'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError, map, tap } from 'rxjs/operators'
+import { NgControlStatus } from '@angular/forms';
 
 
 @Injectable({
@@ -16,7 +17,7 @@ export class HeroService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   }
 
-  // HEROES = this.inMemoryDataService.createDb().heroes
+  /** GET heroes from the server */
   getHeroes(): Observable<Hero[]> {
     return this.http.get<Hero[]>(this.heroesUrl)
       .pipe(
@@ -41,6 +42,7 @@ export class HeroService {
 
   /** PUT: update the hero on th server */
   updateHero(hero: Hero): Observable<any> {
+    console.log(hero)
     return this.http.put(this.heroesUrl, hero, this.httpOptions).pipe(
       tap(_ => this.log(`updated hero id=${hero.id}`)),
       catchError(this.handleError<any>('updateHero')
